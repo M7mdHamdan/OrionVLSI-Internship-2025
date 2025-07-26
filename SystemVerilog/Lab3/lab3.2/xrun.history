@@ -1,0 +1,4 @@
+#e1(24Jul2025:14:18:25): source ./xcelium.d/env.d/env.history.24Jul2025_14_18_25
+s1(24Jul2025:14:18:25):  xrun -sv add4proc.sv add4proc.sv 
+#e2(24Jul2025:14:18:49): source ./xcelium.d/env.d/env.history.24Jul2025_14_18_49
+s2(24Jul2025:14:18:49):  xrun -sv add4proc.sv add4proc_tb.sv 

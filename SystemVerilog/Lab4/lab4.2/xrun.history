@@ -1,0 +1,12 @@
+#e1(24Jul2025:16:09:03): source ./xcelium.d/env.d/env.history.24Jul2025_16_09_03
+s1(24Jul2025:16:09:03):  xrun -sv memory_tb.sv 
+#e2(24Jul2025:16:11:10): source ./xcelium.d/env.d/env.history.24Jul2025_16_11_10
+s2(24Jul2025:16:11:10):  xrun -sv memory_tb.sv 
+#e3(24Jul2025:16:31:17): source ./xcelium.d/env.d/env.history.24Jul2025_16_31_17
+s3(24Jul2025:16:31:17):  xrun -sv memory_tb.sv 
+#e4(24Jul2025:16:32:04): source ./xcelium.d/env.d/env.history.24Jul2025_16_32_04
+s4(24Jul2025:16:32:04):  xrun -sv memory_tb.sv 
+#e5(24Jul2025:16:33:07): source ./xcelium.d/env.d/env.history.24Jul2025_16_33_07
+s5(24Jul2025:16:33:07):  xrun -sv memory_tb.sv 
+#e6(24Jul2025:16:35:26): source ./xcelium.d/env.d/env.history.24Jul2025_16_35_26
+s6(24Jul2025:16:35:26):  xrun -sv memory_tb.sv 

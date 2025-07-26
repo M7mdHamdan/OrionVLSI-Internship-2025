@@ -1,0 +1,52 @@
+xrun(64): 24.03-s007: (c) Copyright 1995-2024 Cadence Design Systems, Inc.
+TOOL:	xrun(64)	24.03-s007: Started on Jul 24, 2025 at 15:54:42 EEST
+xrun
+	-sv
+	memory_tb.sv
+Recompiling... reason: file './memory_tb.sv' is newer than expected.
+	expected: Thu Jul 24 15:53:10 2025
+	actual:   Thu Jul 24 15:54:37 2025
+file: memory_tb.sv
+	module worklib.memory_tb:sv
+		errors: 0, warnings: 0
+		Caching library 'worklib' ....... Done
+	Elaborating the design hierarchy:
+	Top level design units:
+		memory_tb
+	Building instance overlay tables: .................... Done
+	Generating native compiled code:
+		worklib.MyMem:sv <0x7a935bd4>
+			streams:   4, words:  1876
+		worklib.memory_tb:sv <0x2fc81300>
+			streams:   5, words:  9337
+	Building instance specific data structures.
+	Loading native compiled code:     .................... Done
+	Design hierarchy summary:
+		                 Instances  Unique
+		Modules:                 2       2
+		Registers:              12      12
+		Scalar wires:            4       -
+		Vectored wires:          4       -
+		Always blocks:           1       1
+		Initial blocks:          2       2
+		Cont. assignments:       1       1
+		Process Clocks:          1       1
+		Simulation timescale:  1ps
+	Writing initial simulation snapshot: worklib.memory_tb:sv
+Loading snapshot worklib.memory_tb:sv .................... Done
+xcelium> source /usr/cadence/installs/xcelium/XCELIUM2403/tools/xcelium/files/xmsimrc
+xcelium> run
+Time: 0, rdata: 0000000000000000
+Time: 10, rdata: 1010010110100101
+Time: 15, Written to address 0: a5a5
+Time: 15, rdata: 0000000000000000
+Time: 20, Written to address 1: 5a5a
+Time: 20, rdata: 0101101001011010
+Time: 30, rdata: 1010010110100101
+Time: 35, Read from address 0: a5a5
+Time: 35, rdata: 0101101001011010
+Time: 40, Read from address 1: 5a5a
+Simulation complete via $finish(1) at time 50 PS + 0
+./memory_tb.sv:61         $finish;
+xcelium> exit
+TOOL:	xrun(64)	24.03-s007: Exiting on Jul 24, 2025 at 15:54:42 EEST  (total: 00:00:00)

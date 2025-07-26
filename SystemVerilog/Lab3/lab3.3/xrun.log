@@ -1,0 +1,50 @@
+xrun(64): 24.03-s007: (c) Copyright 1995-2024 Cadence Design Systems, Inc.
+TOOL:	xrun(64)	24.03-s007: Started on Jul 24, 2025 at 14:39:13 EEST
+xrun
+	-sv
+	dff.sv
+	dff_tb.sv
+Recompiling... reason: file './dff_tb.sv' is newer than expected.
+	expected: Thu Jul 24 14:38:46 2025
+	actual:   Thu Jul 24 14:39:10 2025
+file: dff_tb.sv
+	module worklib.dff_tb:sv
+		errors: 0, warnings: 0
+		Caching library 'worklib' ....... Done
+	Elaborating the design hierarchy:
+	Top level design units:
+		dff_tb
+	Building instance overlay tables: .................... Done
+	Generating native compiled code:
+		worklib.dff_tb:sv <0x684f2253>
+			streams:   5, words:  5549
+	Building instance specific data structures.
+	Loading native compiled code:     .................... Done
+	Design hierarchy summary:
+		                 Instances  Unique
+		Modules:                 2       2
+		Registers:               6       6
+		Scalar wires:            6       -
+		Always blocks:           1       1
+		Initial blocks:          2       2
+		Pseudo assignments:      2       -
+		Process Clocks:          1       1
+		Simulation timescale:  1ps
+	Writing initial simulation snapshot: worklib.dff_tb:sv
+Loading snapshot worklib.dff_tb:sv .................... Done
+xcelium> source /usr/cadence/installs/xcelium/XCELIUM2403/tools/xcelium/files/xmsimrc
+xcelium> run
+xmsim: *W,DVEXACC: some objects excluded from $dumpvars due to access restrictions, use +access+r on command line for access to all objects.
+            File: ./dff_tb.sv, line = 17, pos = 16
+           Scope: dff_tb
+            Time: 0 FS + 0
+
+Time: 0, d: 0, q: 1
+Time: 10, d: 0, q: 0
+Time: 20, d: 1, q: 1
+Time: 80, d: 0, q: 1
+Time: 85, d: 0, q: 0
+Simulation complete via $finish(1) at time 90 PS + 0
+./dff_tb.sv:44         $finish;
+xcelium> exit
+TOOL:	xrun(64)	24.03-s007: Exiting on Jul 24, 2025 at 14:39:13 EEST  (total: 00:00:00)
