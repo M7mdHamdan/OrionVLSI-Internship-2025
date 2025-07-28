@@ -6,6 +6,7 @@ program my_register_tb;
     shiftLeftRegister sl;
     // const logic [7:0] d = 8'b00000000;
     initial begin
+        $display("Num of Instances %0d", my_register::NumOfInstances());
         my_reg = new(8'b00000000);
         $display("Unit data %b", my_reg.get_data());
         my_reg.load(8'b00000001);
@@ -29,6 +30,10 @@ program my_register_tb;
         $display("After shift Current data for shiftRight %08b",sr.get_data());
         $display("After shift Current data for shiftLeft %08b",sl.get_data());
 
+        $display("Num of Instances %0d", my_register::NumOfInstances());
+        //OPT part
+        $display("Num of Instances %0d", shiftRightRegister::NumOfInstances());
+        $display("Num of Instances %0d", shiftLeftRegister::NumOfInstances());
 
         $finish;
     end
