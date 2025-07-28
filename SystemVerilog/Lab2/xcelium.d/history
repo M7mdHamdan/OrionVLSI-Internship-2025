@@ -1,9 +1,0 @@
-//
-// File created by:  xrun
-// Do not modify this file
-
-s1::(24Jul2025:14:02:00):( xrun -sv MyMem.sv MyMem_tb.sv )&&(./xcelium.d/env.d/env.history.24Jul2025_14_02_00)
-s2::(24Jul2025:14:02:42):( xrun -sv MyMem.sv MyMem_tb.sv )&&(./xcelium.d/env.d/env.history.24Jul2025_14_02_42)
-s3::(24Jul2025:14:04:00):( xrun -sv MyMem.sv MyMem_tb.sv )&&(./xcelium.d/env.d/env.history.24Jul2025_14_04_00)
-s4::(24Jul2025:14:04:25):( xrun -sv MyMem.sv MyMem_tb.sv )&&(./xcelium.d/env.d/env.history.24Jul2025_14_04_25)
-s5::(24Jul2025:14:05:16):( xrun -sv MyMem.sv MyMem_tb.sv )&&(./xcelium.d/env.d/env.history.24Jul2025_14_05_16)
