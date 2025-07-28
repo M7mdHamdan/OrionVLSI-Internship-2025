@@ -1,0 +1,16 @@
+xrun(64): 24.03-s007: (c) Copyright 1995-2024 Cadence Design Systems, Inc.
+TOOL:	xrun(64)	24.03-s007: Started on Jul 28, 2025 at 09:57:57 EEST
+xrun
+	-sv
+	memory_tb.sv
+Loading snapshot worklib.memory_tb:sv .................... Done
+xcelium> source /usr/cadence/installs/xcelium/XCELIUM2403/tools/xcelium/files/xmsimrc
+xcelium> run
+Task1: Value 10 put in mailbox with name 'Task1_Name' mailbox size =           1
+Task1: Value 20 put in mailbox with name 'Task2_Name' mailbox size =           2
+Task2: Value 10 received from mailbox with name 'Task1_Name' mailbox size is = 1
+Task2: Value 20 received from mailbox with name 'Task2_Name' mailbox size is = 0
+Simulation complete via $finish(1) at time 20 PS + 0
+./memory_tb.sv:65         $finish;
+xcelium> exit
+TOOL:	xrun(64)	24.03-s007: Exiting on Jul 28, 2025 at 09:57:57 EEST  (total: 00:00:00)

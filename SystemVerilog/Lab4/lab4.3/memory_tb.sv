@@ -15,32 +15,28 @@ module memory_tb;
         .addr(addr),
         .rdata(rdata)
     );
+    typedef struct {
+        int value;
+        string name;
+    } MailboxItem;
+    mailbox mb = new();
 
-    semaphore sem = new(1);
-
-    task write_mem(input [3:0] address, input [15:0] data);
-        sem.get(1); // Acquire semaphore
-
-        sel = 1;
-        wr = 1;
-        addr = address;
-        wdata = data;
-        #5; // Wait for write operation to complete
-        sem.put(1); // Release semaphore
-
+    task putInMailbox (int value, string name);
+        MailboxItem item;
+        item.value = value;
+        item.name = name;
+        mb.put(item);
+        $display("Task1: Value %0d put in mailbox with name '%s' mailbox size = %d", item.value, item.name, mb.num());
     endtask
 
-    task read_mem(input [3:0] address);
-        sem.get(1); // Acquire semaphore  
-        sel = 1;
-        wr = 0; // Disable write
-        addr = address;
-        #5; // Wait for read operation to complete
-        sem.put(1); // Release semaphore
-    endtask
+
+    task getFromMailbox ();
+    MailboxItem item;
+        mb.get(item);
+        $display("Task2: Value %0d received from mailbox with name '%s' mailbox size is = %0d", item.value, item.name, mb.num());
+        endtask
 
     initial begin
-        // Initialize inputs
         wdata = 16'b0;
         sel = 0;
         wr = 0;
@@ -48,26 +44,21 @@ module memory_tb;
         reset = 0;
         addr = 4'b0000;
 
-        // Apply reset
         reset = 1;
         #10;
         reset = 0;
         fork
             begin
-            write_mem(4'b0000, 16'hA5A5); // Write A5A5 to address 0
-            $display("Time: %0t, Written to address 0: %h", $time, 16'hA5A5);
-            write_mem(4'b0001, 16'h5A5A); // Write 5A5A to address 1
-            $display("Time: %0t, Written to address 1: %h", $time, 16'h5A5A);
+                putInMailbox(10, "Task1_Name");
+                putInMailbox(20, "Task2_Name");
+        
             end
             begin
-            read_mem(4'b0000); // Read from address 0
-            $display("Time: %0t, Read from address 0: %h", $time, rdata);
-            read_mem(4'b0001); // Read from address 1
-            $display("Time: %0t, Read from address 1: %h", $time, rdata);
+                getFromMailbox();
+                getFromMailbox();
             end
         join
         #10;
-        // Finish simulation
         $finish;
     end
 
@@ -75,7 +66,7 @@ module memory_tb;
     initial begin
         forever begin
             clk = ~clk;
-            #5; // Clock period of 10 time units
+            #5; 
         end
     end
 endmodule
