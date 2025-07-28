@@ -26,4 +26,19 @@ class calculator;
         return real'(a) / real'(b);
     endfunction
 
+
+    static function int power(int base, int exp);
+        int result;
+        if (exp == 0) return 1;
+        if (exp < 0) begin
+            $display("Error: Negative exponent not supported");
+            return 0;
+        end
+        result = 1;
+        for (int i = 0; i < exp; i++) begin
+            result *= base;
+        end
+        return result;  
+    endfunction
+
 endclass

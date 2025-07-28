@@ -8,7 +8,7 @@ program calculator_tb;
         $display("Subtracting %f from %f: %f", b, a, calc.sub(a, b));
         $display("Multiplying %f and %f: %f", a, b, calc.mult(a, b));
         $display("Dividing %f by %f: %f", a, b, calc.div(a, b));
-        
+        $display("Power of %d raised to %d: %d", 2, 3, calculator::power(2, 3));
         // Test division by zero
         $display("Dividing %f by 0: %f", a, calc.div(a, 0));
 
