@@ -1,2 +1,0 @@
-#e1(24Jul2025:14:13:57): source ./xcelium.d/env.d/env.history.24Jul2025_14_13_57
-s1(24Jul2025:14:13:57):  xrun -sv add4cont_tb.sv add4cont.sv 
