@@ -32,7 +32,7 @@ class shiftRightRegister extends my_register;
         super.new(data);
     endfunction
     
-    virtual task shift();
+    task shift();
         data = data >> 1;
     endtask
 endclass
@@ -42,7 +42,7 @@ class shiftLeftRegister extends my_register;
         super.new(data);
     endfunction
     
-    virtual task shift();
+    task shift();
         data = data << 1;
     endtask
 endclass
