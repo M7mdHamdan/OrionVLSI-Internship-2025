@@ -1,0 +1,5 @@
+*.log
+*.history
+xcelium.d/
+*.shm/
+worklib/

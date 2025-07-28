@@ -1,6 +1,0 @@
-//
-// File created by:  xrun
-// Do not modify this file
-
-s1::(24Jul2025:14:40:28):( xrun -sv test.sv )&&(./xcelium.d/env.d/env.history.24Jul2025_14_40_28)
-s2::(24Jul2025:14:42:31):( xrun -sv test.sv )&&(./xcelium.d/env.d/env.history.24Jul2025_14_42_31)

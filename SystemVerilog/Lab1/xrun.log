@@ -1,0 +1,9 @@
+xrun(64): 24.03-s007: (c) Copyright 1995-2024 Cadence Design Systems, Inc.
+TOOL:	xrun(64)	24.03-s007: Started on Jul 24, 2025 at 15:34:22 EEST
+xrun
+	-sv
+	slsr.sv
+	slsr_tb.sv
+xrun: *SE,FILEMIS: Cannot find the provided file slsr.sv.
+xrun: *SE,FILEMIS: Cannot find the provided file slsr_tb.sv.
+TOOL:	xrun(64)	24.03-s007: Exiting on Jul 24, 2025 at 15:34:23 EEST  (total: 00:00:01)

@@ -1,0 +1,2 @@
+#e1(24Jul2025:15:34:23): source ./xcelium.d/env.d/env.history.24Jul2025_15_34_23
+s1(24Jul2025:15:34:23):  xrun -sv slsr.sv slsr_tb.sv 
