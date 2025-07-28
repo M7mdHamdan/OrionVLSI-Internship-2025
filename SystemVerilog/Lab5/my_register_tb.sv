@@ -4,7 +4,6 @@ program my_register_tb;
     my_register my_reg;
     shiftRightRegister sr;
     shiftLeftRegister sl;
-    // const logic [7:0] d = 8'b00000000;
     initial begin
         $display("Num of Instances %0d", my_register::NumOfInstances());
         my_reg = new(8'b00000000);
