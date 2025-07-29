@@ -16,6 +16,7 @@ typedef enum logic [2:0] {
 
 opcode_c opcode_fr;
 
+logic ALUOP;
 // int unsigned pc;
 
 always_ff @(posedge clk or negedge rst_ or posedge zero)
@@ -41,13 +42,15 @@ always_comb begin
         ALU_OP: next_state = STORE;
         STORE: next_state = IDLE;
     endcase
+    opcode_fr = HLT;
+    ALUOP = 1'b0;
     case(opcode)
         3'b000: opcode_fr = HLT; 
         3'b001: opcode_fr = SKZ; 
-        3'b010: opcode_fr = ADD; 
-        3'b011: opcode_fr = AND; 
-        3'b100: opcode_fr = XOR; 
-        3'b101: opcode_fr = LDA; 
+        3'b010: begin opcode_fr = ADD; ALUOP = 1'b1; end
+        3'b011: begin opcode_fr = AND; ALUOP = 1'b1; end
+        3'b100: begin opcode_fr = XOR; ALUOP = 1'b1; end
+        3'b101: begin opcode_fr = LDA; ALUOP = 1'b1; end
         3'b110: opcode_fr = STO;
         3'b111: opcode_fr = JMP; 
         default: opcode_fr = HLT; 
@@ -76,19 +79,22 @@ always_comb begin
             mem_rd = 0; load_ir = 0; halt = HLT;
             inc_pc = 1; load_ac = 0; load_pc = 0; mem_wr = 0;
         end
-        //needs some fixing here
         OP_FETCH: begin
             mem_rd = ALUOP; load_ir = 0; halt = 0;
             inc_pc = 0; load_ac = 0; load_pc = 0; mem_wr = 0;
         end
         ALU_OP: begin
-            mem_rd = 0; load_ir = 0; halt = 0;
-            inc_pc = 0; load_ac = 1; load_pc = 0; mem_wr = 0;
+            mem_rd = ALUOP; load_ir = 0; halt = 0;
+            inc_pc = (opcode_fr == SKZ) && zero; load_ac = ALUOP;
+            load_pc = (opcode_fr == JMP); mem_wr = 0;
         end
         STORE: begin
-            mem_rd = 0; load_ir = 0; halt = 0;
-            inc_pc = 0; load_ac = 0; load_pc = 0; mem_wr = 1;
+            mem_rd = ALUOP; load_ir = 0; halt = 0;
+            inc_pc = (opcode_fr == JMP); load_ac = ALUOP; 
+            load_pc = (opcode_fr == JMP); mem_wr = (opcode_fr == STO);
         end
+
+    endcase
 
 end
 
