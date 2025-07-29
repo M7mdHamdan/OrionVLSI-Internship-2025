@@ -1,3 +1,6 @@
+`timescale 1ns/1ps
+timeunit 1ns;
+timeprecision 1ps;
 module controller(
     input logic [2:0] opcode,
     input logic rst_, clk, zero,
@@ -17,7 +20,6 @@ typedef enum logic [2:0] {
 opcode_c opcode_fr;
 
 logic ALUOP;
-// int unsigned pc;
 
 always_ff @(posedge clk or negedge rst_ or posedge zero)
     begin
@@ -32,7 +34,7 @@ always_ff @(posedge clk or negedge rst_ or posedge zero)
     end
 
 always_comb begin
-    case(current_state)
+    unique case(current_state)
         INST_ADDR: next_state = INST_FETCH;
         INST_FETCH: next_state = INST_LOAD;
         INST_LOAD: next_state = IDLE;
@@ -59,35 +61,45 @@ end
 
 always_comb begin
     case(current_state)
+        mem_rd = 0; load_ir = 0; halt = 0;
+        inc_pc = 0; load_ac = 0; load_pc = 0; mem_wr = 0;
+        
         INST_ADDR: begin
             mem_rd = 0; load_ir = 0; halt = 0;
             inc_pc = 0; load_ac = 0; load_pc = 0; mem_wr = 0;
         end
+
         INST_FETCH: begin
             mem_rd = 1; load_ir = 0; halt = 0;
             inc_pc = 0; load_ac = 0; load_pc = 0; mem_wr = 0;
         end
+
         INST_LOAD: begin
             mem_rd = 1; load_ir = 1; halt = 0;
             inc_pc = 0; load_ac = 0; load_pc = 0; mem_wr = 0;
         end
+
         IDLE: begin
             mem_rd = 1; load_ir = 1; halt = 0;
             inc_pc = 0; load_ac = 0; load_pc = 0; mem_wr = 0;
         end
+
         OP_ADDR: begin
-            mem_rd = 0; load_ir = 0; halt = HLT;
+            mem_rd = 0; load_ir = 0; halt = (opcode_fr == HLT);
             inc_pc = 1; load_ac = 0; load_pc = 0; mem_wr = 0;
         end
+
         OP_FETCH: begin
             mem_rd = ALUOP; load_ir = 0; halt = 0;
             inc_pc = 0; load_ac = 0; load_pc = 0; mem_wr = 0;
         end
+
         ALU_OP: begin
             mem_rd = ALUOP; load_ir = 0; halt = 0;
             inc_pc = (opcode_fr == SKZ) && zero; load_ac = ALUOP;
             load_pc = (opcode_fr == JMP); mem_wr = 0;
         end
+
         STORE: begin
             mem_rd = ALUOP; load_ir = 0; halt = 0;
             inc_pc = (opcode_fr == JMP); load_ac = ALUOP; 
