@@ -21,15 +21,12 @@ opcode_c opcode_fr;
 
 logic ALUOP;
 
-always_ff @(posedge clk or negedge rst_ or posedge zero)
+always_ff @(posedge clk or negedge rst_)
     begin
-    if (zero)
-        opcode_fr <= HLT;
     if (!rst_)
         current_state <= INST_ADDR;
     else begin
         current_state <= next_state;
-        // inc_pc <= inc_pc + 4;
     end
     end
 
@@ -46,7 +43,7 @@ always_comb begin
     endcase
     opcode_fr = HLT;
     ALUOP = 1'b0;
-    case(opcode)
+    unique case(opcode)
         3'b000: opcode_fr = HLT; 
         3'b001: opcode_fr = SKZ; 
         3'b010: begin opcode_fr = ADD; ALUOP = 1'b1; end
@@ -60,52 +57,47 @@ always_comb begin
 end
 
 always_comb begin
-    case(current_state)
-        mem_rd = 0; load_ir = 0; halt = 0;
-        inc_pc = 0; load_ac = 0; load_pc = 0; mem_wr = 0;
-        
-        INST_ADDR: begin
-            mem_rd = 0; load_ir = 0; halt = 0;
-            inc_pc = 0; load_ac = 0; load_pc = 0; mem_wr = 0;
-        end
-
+    // Default
+    mem_rd = 0; load_ir = 0; halt = 0;
+    inc_pc = 0; load_ac = 0; load_pc = 0; mem_wr = 0;
+    
+    unique case(current_state)
+        INST_ADDR:begin end // No action needed;
         INST_FETCH: begin
-            mem_rd = 1; load_ir = 0; halt = 0;
-            inc_pc = 0; load_ac = 0; load_pc = 0; mem_wr = 0;
+            mem_rd = 1;
         end
 
         INST_LOAD: begin
-            mem_rd = 1; load_ir = 1; halt = 0;
-            inc_pc = 0; load_ac = 0; load_pc = 0; mem_wr = 0;
+            mem_rd = 1; load_ir = 1;
         end
 
         IDLE: begin
-            mem_rd = 1; load_ir = 1; halt = 0;
-            inc_pc = 0; load_ac = 0; load_pc = 0; mem_wr = 0;
+            mem_rd = 1; load_ir = 1;
         end
 
         OP_ADDR: begin
-            mem_rd = 0; load_ir = 0; halt = (opcode_fr == HLT);
-            inc_pc = 1; load_ac = 0; load_pc = 0; mem_wr = 0;
+            halt = (opcode_fr == HLT);
+            inc_pc = 1;
         end
 
         OP_FETCH: begin
-            mem_rd = ALUOP; load_ir = 0; halt = 0;
-            inc_pc = 0; load_ac = 0; load_pc = 0; mem_wr = 0;
+            mem_rd = ALUOP;
         end
 
         ALU_OP: begin
-            mem_rd = ALUOP; load_ir = 0; halt = 0;
-            inc_pc = (opcode_fr == SKZ) && zero; load_ac = ALUOP;
-            load_pc = (opcode_fr == JMP); mem_wr = 0;
+            mem_rd = ALUOP;
+            inc_pc = (opcode_fr == SKZ) && zero;
+            load_ac = ALUOP;
+            load_pc = (opcode_fr == JMP);
         end
 
         STORE: begin
-            mem_rd = ALUOP; load_ir = 0; halt = 0;
-            inc_pc = (opcode_fr == JMP); load_ac = ALUOP; 
-            load_pc = (opcode_fr == JMP); mem_wr = (opcode_fr == STO);
+            mem_rd = ALUOP;
+            inc_pc = (opcode_fr == JMP);
+            load_ac = ALUOP; 
+            load_pc = (opcode_fr == JMP);
+            mem_wr = (opcode_fr == STO);
         end
-
     endcase
 
 end
