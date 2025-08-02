@@ -60,7 +60,7 @@ always_comb begin
     // Default
     mem_rd = 0; load_ir = 0; halt = 0;
     inc_pc = 0; load_ac = 0; load_pc = 0; mem_wr = 0;
-    
+      
     unique case(current_state)
         INST_ADDR:begin end // No action needed;
         INST_FETCH: begin
