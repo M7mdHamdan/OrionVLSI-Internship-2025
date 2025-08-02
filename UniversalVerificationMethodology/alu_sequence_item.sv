@@ -12,12 +12,12 @@ class alu_sequence_item extends uvm_sequence_item;
 
     // Utility and Field macros
     `uvm_object_utils_begin(alu_sequence_item)
-    `uvm_field_int(rst, UVM_ALL_ON)
-    `uvm_field_int(A, UVM_ALL_ON)
-    `uvm_field_int(B, UVM_ALL_ON)
-    `uvm_field_int(Opcode, UVM_ALL_ON)
-    `uvm_field_int(Result, UVM_ALL_ON)
-    `uvm_field_int(Error, UVM_ALL_ON)
+        `uvm_field_int(rst, UVM_ALL_ON)
+        `uvm_field_int(A, UVM_ALL_ON)
+        `uvm_field_int(B, UVM_ALL_ON)
+        `uvm_field_int(Opcode, UVM_ALL_ON)
+        `uvm_field_int(Result, UVM_ALL_ON)
+        `uvm_field_int(Error, UVM_ALL_ON)
     `uvm_object_utils_end
 
 
